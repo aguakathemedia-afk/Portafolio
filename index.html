@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>AKT Media — Portafolio Profesional</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+<style>
+:root {
+  --lime:    #C8CC1A;
+  --forest:  #3A5218;
+  --silver:  #B8BCBC;
+  --olive:   #6B5828;
+  --cream:   #F8F6EE;
+  --dark:    #1A2208;
+  --fog:     #ECEEE6;
+  --text:    #2A2A1A;
+  --muted:   #6A6A5A;
+  --lime-lt: #E8ECA0;
+  --lime-dk: #7A7E08;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{background:var(--cream);color:var(--text);font-family:'Outfit',sans-serif;overflow-x:hidden;cursor:none;}
+
+/* CURSOR */
+.cursor{width:10px;height:10px;background:var(--forest);border-radius:50%;position:fixed;top:0;left:0;pointer-events:none;z-index:9999;transition:background 0.3s;}
+.cursor-ring{width:32px;height:32px;border:1.5px solid var(--lime);border-radius:50%;position:fixed;top:0;left:0;pointer-events:none;z-index:9998;transition:transform 0.35s ease;}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;justify-content:space-between;align-items:center;padding:22px 60px;background:rgba(248,246,238,0.93);backdrop-filter:blur(12px);border-bottom:1px solid rgba(58,82,24,0.08);}
+.nav-logo{font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:var(--forest);text-decoration:none;letter-spacing:1px;}
+.nav-logo span{color:var(--lime-dk);font-style:italic;}
+.nav-links{display:flex;gap:36px;list-style:none;}
+.nav-links a{font-size:12px;letter-spacing:1.5px;text-transform:uppercase;font-weight:600;color:var(--muted);text-decoration:none;transition:color 0.3s;}
+.nav-links a:hover{color:var(--forest);}
+
+/* HERO */
+.hero{min-height:100vh;display:grid;grid-template-columns:1fr 1fr;align-items:center;padding:120px 60px 80px;position:relative;overflow:hidden;gap:60px;}
+.hero-blob1{position:absolute;right:-100px;top:-60px;width:680px;height:680px;background:radial-gradient(ellipse,rgba(200,204,26,0.14) 0%,transparent 70%);border-radius:60% 40% 55% 45% / 50% 60% 40% 50%;animation:morph 8s ease-in-out infinite;}
+.hero-blob2{position:absolute;left:-80px;bottom:-80px;width:480px;height:480px;background:radial-gradient(ellipse,rgba(58,82,24,0.07) 0%,transparent 70%);border-radius:40% 60% 45% 55% / 60% 40% 60% 40%;animation:morph 11s ease-in-out infinite reverse;}
+@keyframes morph{0%,100%{border-radius:60% 40% 55% 45% / 50% 60% 40% 50%;}33%{border-radius:40% 60% 35% 65% / 60% 40% 65% 35%;}66%{border-radius:55% 45% 65% 35% / 40% 60% 35% 65%;}}
+.hero-left{position:relative;z-index:1;}
+.hero-eyebrow{display:inline-flex;align-items:center;gap:10px;background:var(--forest);color:var(--lime);padding:6px 16px;font-size:11px;letter-spacing:2.5px;text-transform:uppercase;font-weight:600;margin-bottom:28px;opacity:0;animation:fadeUp 0.7s 0.2s forwards;}
+.hero-title{font-family:'Playfair Display',serif;font-size:clamp(52px,6vw,86px);font-weight:900;line-height:1.05;color:var(--dark);opacity:0;animation:fadeUp 0.8s 0.4s forwards;}
+.hero-title .it{font-style:italic;color:var(--forest);}
+.hero-title .underlined{position:relative;display:inline-block;}
+.hero-title .underlined::after{content:'';position:absolute;left:0;bottom:6px;right:0;height:7px;background:var(--lime);z-index:-1;opacity:0.65;}
+.hero-sub{font-size:17px;line-height:1.8;color:var(--muted);margin-top:28px;max-width:480px;opacity:0;animation:fadeUp 0.8s 0.6s forwards;}
+.hero-sub strong{color:var(--forest);font-weight:600;}
+.hero-cta{margin-top:48px;display:flex;gap:16px;align-items:center;opacity:0;animation:fadeUp 0.8s 0.8s forwards;}
+.btn-main{background:var(--forest);color:var(--cream);padding:15px 36px;font-size:13px;font-weight:600;letter-spacing:1px;text-transform:uppercase;text-decoration:none;transition:background 0.3s,transform 0.2s;cursor:none;}
+.btn-main:hover{background:var(--dark);transform:translateY(-2px);}
+.btn-outline{color:var(--forest);font-size:13px;font-weight:600;letter-spacing:1px;text-transform:uppercase;text-decoration:none;display:flex;align-items:center;gap:8px;border-bottom:2px solid var(--lime);padding-bottom:2px;transition:gap 0.3s;}
+.btn-outline:hover{gap:14px;}
+.hero-right{position:relative;z-index:1;display:flex;align-items:center;justify-content:center;opacity:0;animation:fadeIn 1s 0.5s forwards;}
+.avo-wrap{width:360px;height:360px;background:var(--forest);border-radius:55% 45% 60% 40% / 50% 60% 40% 50%;display:flex;align-items:center;justify-content:center;position:relative;animation:morph 9s ease-in-out infinite;}
+.avo-mid{width:250px;height:250px;background:var(--lime);border-radius:50% 50% 55% 45% / 55% 45% 55% 45%;display:flex;align-items:center;justify-content:center;animation:morph 7s ease-in-out infinite reverse;}
+.avo-seed{width:96px;height:96px;background:var(--olive);border-radius:50%;display:flex;align-items:center;justify-content:center;}
+.avo-txt{font-family:'Playfair Display',serif;font-size:13px;font-weight:700;color:var(--cream);text-align:center;line-height:1.3;}
+.ftag{position:absolute;background:var(--cream);border:1px solid rgba(58,82,24,0.15);padding:10px 18px;font-size:12px;font-weight:600;color:var(--forest);white-space:nowrap;box-shadow:0 4px 20px rgba(0,0,0,0.07);}
+.ftag .dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--lime);margin-right:6px;}
+.ft1{top:20px;right:-10px;animation:flt 3s ease-in-out infinite;}
+.ft2{bottom:60px;left:-30px;animation:flt 3.5s ease-in-out infinite 0.5s;}
+.ft3{bottom:-5px;right:10px;animation:flt 4s ease-in-out infinite 1s;}
+@keyframes flt{0%,100%{transform:translateY(0);}50%{transform:translateY(-8px);}}
+
+/* ADJ STRIP */
+.adj-strip{background:var(--forest);padding:24px 60px;display:flex;justify-content:center;gap:80px;align-items:center;}
+.adj-item{text-align:center;}
+.adj-word{font-family:'Playfair Display',serif;font-size:20px;font-style:italic;color:var(--lime);display:block;}
+.adj-sub{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.35);display:block;margin-top:4px;}
+.adj-div{width:1px;height:40px;background:rgba(255,255,255,0.1);}
+
+/* SECTIONS */
+.section{padding:120px 60px;}
+.sec-label{display:flex;align-items:center;gap:12px;font-size:11px;letter-spacing:3px;text-transform:uppercase;font-weight:600;color:var(--olive);margin-bottom:20px;}
+.sec-label::before{content:'';display:block;width:28px;height:2px;background:var(--lime);}
+.sec-title{font-family:'Playfair Display',serif;font-size:clamp(38px,5vw,64px);font-weight:900;line-height:1.1;color:var(--dark);}
+.sec-title em{font-style:italic;color:var(--forest);}
+
+/* PROBLEMA */
+.prob-section{background:var(--dark);padding:120px 60px;}
+.prob-section .sec-label{color:var(--lime);}
+.prob-section .sec-label::before{background:var(--lime);}
+.prob-section .sec-title{color:var(--cream);}
+.prob-section .sec-title em{color:var(--lime);}
+.prob-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;margin-top:60px;}
+.prob-card{background:#1E2C0E;padding:40px 32px;position:relative;overflow:hidden;transition:background 0.4s,transform 0.3s;cursor:none;}
+.prob-card:hover{background:#243610;transform:translateY(-4px);}
+.prob-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;background:var(--lime);transform:scaleX(0);transform-origin:left;transition:transform 0.4s;}
+.prob-card:hover::after{transform:scaleX(1);}
+.pnum{font-family:'Playfair Display',serif;font-size:54px;font-weight:900;color:rgba(200,204,26,0.06);position:absolute;top:14px;right:18px;line-height:1;}
+.picon{font-size:28px;margin-bottom:18px;}
+.prob-card h3{font-size:17px;font-weight:600;color:var(--cream);margin-bottom:12px;line-height:1.3;}
+.prob-card p{font-size:13px;line-height:1.7;color:rgba(255,255,255,0.42);}
+
+/* SOLUCION */
+.sol-layout{display:grid;grid-template-columns:1fr 1fr;gap:100px;align-items:center;margin-top:70px;}
+.sol-text p{font-size:16px;line-height:1.8;color:var(--muted);margin-bottom:16px;}
+.sol-text strong{color:var(--text);font-weight:600;}
+.svc-list{margin-top:0;}
+.svc-row{display:flex;align-items:center;gap:20px;padding:18px 0;border-bottom:1px solid rgba(58,82,24,0.1);cursor:none;transition:padding-left 0.3s;}
+.svc-row:hover{padding-left:10px;}
+.svc-row:hover .sa{color:var(--forest);}
+.sn{font-family:'Playfair Display',serif;font-size:13px;color:var(--lime-dk);min-width:28px;font-weight:700;}
+.sm{font-size:16px;font-weight:500;flex:1;color:var(--text);}
+.sa{color:var(--silver);font-size:18px;transition:color 0.3s;}
+
+/* CEO */
+.ceo-section{background:var(--fog);padding:120px 60px;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;}
+.ceo-vis{position:relative;}
+.ceo-frame{width:100%;aspect-ratio:3/4;background:var(--forest);position:relative;overflow:hidden;}
+.ceo-ph{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;background:linear-gradient(155deg,var(--forest) 0%,var(--dark) 100%);}
+.ceo-kl{font-family:'Playfair Display',serif;font-size:96px;font-weight:900;font-style:italic;color:rgba(200,204,26,0.12);line-height:1;}
+.ceo-pn{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.25);margin-top:12px;}
+.ceo-acc{position:absolute;bottom:-18px;right:-18px;width:calc(100% - 48px);height:calc(100% - 48px);border:2px solid rgba(200,204,26,0.25);pointer-events:none;}
+.ceo-badge{position:absolute;bottom:28px;left:-22px;background:var(--lime);color:var(--dark);padding:14px 20px;font-size:12px;font-weight:700;letter-spacing:1px;text-transform:uppercase;}
+.ceo-name{font-family:'Playfair Display',serif;font-size:clamp(46px,5.5vw,72px);font-weight:900;line-height:0.95;margin-bottom:12px;color:var(--dark);}
+.ceo-name .last{color:var(--forest);font-style:italic;}
+.ceo-role{font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--olive);font-weight:600;margin-bottom:28px;}
+.ceo-bio{font-size:16px;line-height:1.8;color:var(--muted);margin-bottom:14px;}
+.ceo-bio strong{color:var(--text);font-weight:600;}
+.pills{display:flex;flex-wrap:wrap;gap:8px;margin-top:32px;}
+.pill{padding:7px 16px;border:1.5px solid rgba(58,82,24,0.18);font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);font-weight:600;transition:all 0.3s;cursor:none;}
+.pill:hover{border-color:var(--forest);color:var(--forest);background:rgba(58,82,24,0.04);}
+
+/* MARQUEE */
+.mq-section{padding:60px 0;overflow:hidden;}
+.mq-label{text-align:center;font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--muted);margin-bottom:32px;}
+.mq-wrap{border-top:1px solid rgba(58,82,24,0.1);border-bottom:1px solid rgba(58,82,24,0.1);padding:24px 0;overflow:hidden;}
+.mq-track{display:flex;gap:56px;align-items:center;animation:mq 20s linear infinite;width:max-content;}
+.mi{font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:rgba(58,82,24,0.16);white-space:nowrap;letter-spacing:2px;transition:color 0.3s;}
+.mi:hover{color:rgba(58,82,24,0.45);}
+.ms{width:6px;height:6px;border-radius:50%;background:var(--lime);opacity:0.5;}
+@keyframes mq{from{transform:translateX(0);}to{transform:translateX(-50%);}}
+
+/* RESULTADOS */
+.res-section{background:var(--dark);padding:120px 60px;}
+.res-section .sec-label{color:var(--lime);}
+.res-section .sec-label::before{background:var(--lime);}
+.res-section .sec-title{color:var(--cream);}
+.res-section .sec-title em{color:var(--lime);}
+.res-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;margin-top:60px;}
+.res-card{background:#1E2C0E;padding:48px 36px;position:relative;overflow:hidden;transition:transform 0.3s;}
+.res-card:hover{transform:translateY(-5px);}
+.res-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(to right,var(--lime),transparent);opacity:0;transition:opacity 0.4s;}
+.res-card:hover::before{opacity:1;}
+.rnum{font-family:'Playfair Display',serif;font-size:64px;font-weight:900;line-height:1;color:var(--lime);margin-bottom:10px;}
+.rnum sup{font-size:28px;vertical-align:top;margin-top:12px;display:inline-block;}
+.rlabel{font-size:13px;line-height:1.6;color:rgba(255,255,255,0.45);}
+.rlabel strong{color:rgba(255,255,255,0.78);font-weight:600;display:block;margin-bottom:4px;}
+
+/* DIFERENCIAL */
+.diff-section{padding:120px 60px;}
+.diff-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:40px;margin-top:70px;}
+.diff-card{padding:44px 36px;border:1.5px solid rgba(58,82,24,0.1);position:relative;overflow:hidden;transition:border-color 0.4s,transform 0.3s;cursor:none;}
+.diff-card:hover{border-color:var(--lime);transform:translateY(-4px);}
+.diff-card:hover::after{opacity:1;}
+.diff-card::after{content:'';position:absolute;top:0;left:0;right:0;height:100%;background:linear-gradient(180deg,rgba(200,204,26,0.03) 0%,transparent 100%);opacity:0;transition:opacity 0.4s;}
+.dicon{width:48px;height:48px;border-radius:50%;background:var(--fog);display:flex;align-items:center;justify-content:center;font-size:22px;margin-bottom:24px;}
+.diff-card h3{font-family:'Playfair Display',serif;font-size:22px;font-weight:700;margin-bottom:12px;color:var(--dark);}
+.diff-card p{font-size:14px;line-height:1.75;color:var(--muted);}
+
+/* MANIFESTO */
+.mani-section{background:var(--forest);padding:140px 60px;text-align:center;position:relative;overflow:hidden;}
+.mani-section::before{content:'"';position:absolute;top:-40px;left:30px;font-family:'Playfair Display',serif;font-size:300px;color:rgba(200,204,26,0.05);line-height:1;pointer-events:none;}
+.mani-q{font-family:'Playfair Display',serif;font-size:clamp(28px,4vw,50px);font-weight:700;font-style:italic;color:var(--cream);max-width:860px;margin:0 auto 40px;line-height:1.35;position:relative;}
+.mani-q .hl{color:var(--lime);font-style:normal;font-weight:900;}
+.mani-a{font-size:12px;letter-spacing:3px;text-transform:uppercase;color:rgba(200,204,26,0.55);font-weight:600;}
+
+/* CONTACTO */
+.contact-section{padding:120px 60px;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start;}
+.ctitle{font-family:'Playfair Display',serif;font-size:clamp(48px,5.5vw,80px);font-weight:900;line-height:0.95;margin-bottom:24px;color:var(--dark);}
+.ctitle em{font-style:italic;color:var(--forest);}
+.cdesc{font-size:16px;line-height:1.8;color:var(--muted);margin-bottom:40px;}
+.citems{display:flex;flex-direction:column;gap:18px;}
+.citem{display:flex;align-items:center;gap:16px;font-size:15px;color:var(--text);text-decoration:none;transition:color 0.3s,gap 0.3s;}
+.citem:hover{color:var(--forest);gap:22px;}
+.cico{width:42px;height:42px;border:1.5px solid rgba(58,82,24,0.15);display:flex;align-items:center;justify-content:center;font-size:16px;transition:all 0.3s;}
+.citem:hover .cico{border-color:var(--forest);background:rgba(58,82,24,0.05);}
+.cright{background:var(--dark);padding:52px;position:relative;}
+.cright::before{content:'';position:absolute;top:0;left:0;width:40px;height:40px;border-top:2px solid var(--lime);border-left:2px solid var(--lime);}
+.cright::after{content:'';position:absolute;bottom:0;right:0;width:40px;height:40px;border-bottom:2px solid var(--lime);border-right:2px solid var(--lime);}
+.cright h3{font-family:'Playfair Display',serif;font-size:24px;font-style:italic;font-weight:700;color:var(--cream);margin-bottom:20px;}
+.cright p{font-size:15px;line-height:1.8;color:rgba(255,255,255,0.48);margin-bottom:16px;}
+.cright p strong{color:rgba(255,255,255,0.82);font-weight:600;}
+
+/* FOOTER */
+footer{padding:36px 60px;background:var(--dark);display:flex;justify-content:space-between;align-items:center;border-top:1px solid rgba(255,255,255,0.05);}
+.flogo{font-family:'Playfair Display',serif;font-size:18px;font-weight:700;color:var(--cream);}
+.flogo span{color:var(--lime);font-style:italic;}
+.fcopy{font-size:11px;color:rgba(255,255,255,0.22);letter-spacing:1px;}
+.flinks{display:flex;gap:24px;}
+.flinks a{font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,0.28);text-decoration:none;transition:color 0.3s;}
+.flinks a:hover{color:var(--lime);}
+
+/* ANIMATIONS */
+@keyframes fadeUp{from{opacity:0;transform:translateY(28px);}to{opacity:1;transform:translateY(0);}}
+@keyframes fadeIn{from{opacity:0;}to{opacity:1;}}
+.reveal{opacity:0;transform:translateY(36px);transition:opacity 0.85s ease,transform 0.85s ease;}
+.reveal.visible{opacity:1;transform:translateY(0);}
+.d1{transition-delay:0.12s;}.d2{transition-delay:0.24s;}.d3{transition-delay:0.36s;}
+
+@media(max-width:900px){
+  nav{padding:18px 24px;}
+  .nav-links{display:none;}
+  .hero{grid-template-columns:1fr;padding:100px 24px 60px;gap:40px;}
+  .hero-right{display:none;}
+  .adj-strip{padding:20px 24px;gap:24px;flex-wrap:wrap;}
+  .section,.prob-section,.sol-section,.ceo-section,.diff-section,.res-section,.mani-section,.contact-section{padding:80px 24px;}
+  .prob-grid,.res-grid,.diff-grid{grid-template-columns:1fr;gap:2px;}
+  .sol-layout,.ceo-section,.contact-section{grid-template-columns:1fr;gap:48px;}
+  footer{flex-direction:column;gap:16px;text-align:center;}
+}
+</style>
+</head>
+<body>
+
+<div class="cursor" id="C"></div>
+<div class="cursor-ring" id="R"></div>
+
+<nav>
+  <a href="#" class="nav-logo">AKT<span>Media</span></a>
+  <ul class="nav-links">
+    <li><a href="#problema">El problema</a></li>
+    <li><a href="#servicios">Servicios</a></li>
+    <li><a href="#ceo">Katheryne</a></li>
+    <li><a href="#resultados">Resultados</a></li>
+    <li><a href="#contacto">Contacto</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="inicio">
+  <div class="hero-blob1"></div><div class="hero-blob2"></div>
+  <div class="hero-left">
+    <p class="hero-eyebrow">Agencia de Mercadeo · AguaKathe Media</p>
+    <h1 class="hero-title">
+      Tu marca<br>
+      <span class="it">necesita</span><br>
+      <span class="underlined">resultados.</span>
+    </h1>
+    <p class="hero-sub">Producción de contenido, estrategia de marca y gestión de redes sociales — desde un equipo que <strong>escucha primero y ejecuta con estándares de alto nivel.</strong></p>
+    <div class="hero-cta">
+      <a href="#contacto" class="btn-main">Trabajemos juntos</a>
+      <a href="#resultados" class="btn-outline">Ver resultados →</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="avo-wrap">
+      <div class="avo-mid">
+        <div class="avo-seed"><div class="avo-txt">AKT<br>Media</div></div>
+      </div>
+    </div>
+    <div class="ftag ft1"><span class="dot"></span>+300% visualizaciones</div>
+    <div class="ftag ft2"><span class="dot"></span>+50% tráfico a tienda</div>
+    <div class="ftag ft3"><span class="dot"></span>Contenido viral ✓</div>
+  </div>
+</section>
+
+<!-- ADJ STRIP -->
+<div class="adj-strip">
+  <div class="adj-item"><span class="adj-word">Cercanía</span><span class="adj-sub">Tu éxito es nuestro éxito</span></div>
+  <div class="adj-div"></div>
+  <div class="adj-item"><span class="adj-word">Análisis del entorno</span><span class="adj-sub">Estrategia con contexto real</span></div>
+  <div class="adj-div"></div>
+  <div class="adj-item"><span class="adj-word">Escucha activa</span><span class="adj-sub">La necesidad del cliente, primero</span></div>
+</div>
+
+<!-- PROBLEMA -->
+<section class="prob-section" id="problema">
+  <p class="sec-label reveal">El problema que resolvemos</p>
+  <h2 class="sec-title reveal">¿Tu marca tiene potencial<br>pero no <em>sabe cómo comunicarlo?</em></h2>
+  <div class="prob-grid">
+    <div class="prob-card reveal"><div class="pnum">01</div><div class="picon">📉</div><h3>Contenido sin estrategia</h3><p>Publicas constantemente pero sin hilo conductor. El algoritmo no te favorece y tu audiencia no crece de forma sostenida.</p></div>
+    <div class="prob-card reveal d1"><div class="pnum">02</div><div class="picon">🎯</div><h3>No llegas a tu cliente ideal</h3><p>Tu mensaje no está calibrado. Atraes ruido, no prospectos reales listos para comprar o visitar tu negocio.</p></div>
+    <div class="prob-card reveal d2"><div class="pnum">03</div><div class="picon">🎬</div><h3>Producción inconsistente</h3><p>El video es el rey del marketing actual. Producir con calidad y coherencia de marca es agotador sin el equipo correcto.</p></div>
+    <div class="prob-card reveal d3"><div class="pnum">04</div><div class="picon">🚀</div><h3>Quieres escalar, no estancarte</h3><p>Tienes una marca con hambre de crecimiento. Necesitas un aliado estratégico con estándares internacionales.</p></div>
+  </div>
+</section>
+
+<!-- SOLUCIÓN -->
+<section class="section" id="servicios">
+  <div class="sol-layout">
+    <div class="reveal">
+      <p class="sec-label">Nuestra solución</p>
+      <h2 class="sec-title">Somos tu equipo<br><em>creativo completo.</em></h2>
+      <div class="sol-text" style="margin-top:28px;">
+        <p>AguaKathe Media es una agencia multidisciplinaria que combina estrategia, producción y gestión para que tu marca hable con autoridad en cada plataforma.</p>
+        <p>No solo creamos contenido. <strong>Creamos sistemas que funcionan</strong> — con análisis del entorno, escucha activa y resultados medibles en cada campaña.</p>
+      </div>
+    </div>
+    <div class="svc-list reveal d1">
+      <div class="svc-row"><span class="sn">01</span><span class="sm">Producción de Video &amp; Contenido</span><span class="sa">→</span></div>
+      <div class="svc-row"><span class="sn">02</span><span class="sm">Estrategia de Marca &amp; Marketing</span><span class="sa">→</span></div>
+      <div class="svc-row"><span class="sn">03</span><span class="sm">Gestión de Redes Sociales</span><span class="sa">→</span></div>
+      <div class="svc-row"><span class="sn">04</span><span class="sm">Campañas de Viralización</span><span class="sa">→</span></div>
+      <div class="svc-row"><span class="sn">05</span><span class="sm">Análisis &amp; Reportes de Impacto</span><span class="sa">→</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- CEO -->
+<section class="ceo-section" id="ceo">
+  <div class="ceo-vis reveal">
+    <div class="ceo-frame">
+      <div class="ceo-ph"><div class="ceo-kl">KR</div><p class="ceo-pn">[ tu foto aquí ]</p></div>
+    </div>
+    <div class="ceo-acc"></div>
+    <div class="ceo-badge">CEO &amp; Dir. Creativa</div>
+  </div>
+  <div class="reveal d1">
+    <p class="sec-label">La fuerza detrás de la agencia</p>
+    <h2 class="ceo-name">Katheryne<br><span class="last">Rondon</span></h2>
+    <p class="ceo-role">CEO &amp; Directora Creativa · AguaKathe Media</p>
+    <p class="ceo-bio">Con experiencia trabajando para <strong>más de 5 marcas internacionales desde Estados Unidos</strong>, Katheryne trae estándares globales al mercado local. Fundó AguaKathe Media con una misión clara: <strong>darle a cada marca la atención y calidad que merece.</strong></p>
+    <p class="ceo-bio">Lidera su equipo desde la <strong>escucha activa</strong>, el <strong>análisis del entorno</strong> y la <strong>cercanía genuina</strong> — porque el cliente no es un número, es un socio.</p>
+    <div class="pills">
+      <span class="pill">Dirección Creativa</span>
+      <span class="pill">Estrategia Digital</span>
+      <span class="pill">Producción Audiovisual</span>
+      <span class="pill">Exp. Internacional</span>
+      <span class="pill">Branding de Marca</span>
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<section class="mq-section">
+  <p class="mq-label">Han confiado en AguaKathe Media</p>
+  <div class="mq-wrap">
+    <div class="mq-track">
+      <span class="mi">MARCA NACIONAL 01</span><span class="ms"></span>
+      <span class="mi">MARCA NACIONAL 02</span><span class="ms"></span>
+      <span class="mi">MARCA NACIONAL 03</span><span class="ms"></span>
+      <span class="mi">MARCA NACIONAL 04</span><span class="ms"></span>
+      <span class="mi">CLIENTE INT'L · EE.UU.</span><span class="ms"></span>
+      <span class="mi">CLIENTE INT'L · EE.UU.</span><span class="ms"></span>
+      <span class="mi">CLIENTE INT'L · EE.UU.</span><span class="ms"></span>
+      <span class="mi">MARCA NACIONAL 01</span><span class="ms"></span>
+      <span class="mi">MARCA NACIONAL 02</span><span class="ms"></span>
+      <span class="mi">MARCA NACIONAL 03</span><span class="ms"></span>
+      <span class="mi">MARCA NACIONAL 04</span><span class="ms"></span>
+      <span class="mi">CLIENTE INT'L · EE.UU.</span><span class="ms"></span>
+      <span class="mi">CLIENTE INT'L · EE.UU.</span><span class="ms"></span>
+      <span class="mi">CLIENTE INT'L · EE.UU.</span><span class="ms"></span>
+    </div>
+  </div>
+</section>
+
+<!-- RESULTADOS -->
+<section class="res-section" id="resultados">
+  <p class="sec-label reveal">Resultados reales. Sin exageraciones.</p>
+  <h2 class="sec-title reveal">No prometemos.<br><em>Entregamos.</em></h2>
+  <div class="res-grid">
+    <div class="res-card reveal">
+      <div class="rnum" data-target="300">0<sup>%</sup></div>
+      <div class="rlabel"><strong>Crecimiento en visualizaciones</strong>Logrado en un solo mes de trabajo estratégico de contenido.</div>
+    </div>
+    <div class="res-card reveal d1">
+      <div class="rnum" data-target="50">0<sup>%</sup></div>
+      <div class="rlabel"><strong>Más tráfico a tienda física</strong>Incremento real de clientes presenciales con una campaña breve y bien enfocada.</div>
+    </div>
+    <div class="res-card reveal d2">
+      <div class="rnum" data-target="100">0<sup>%</sup></div>
+      <div class="rlabel"><strong>Mejora en alcance de historias</strong>En el 100% de los casos, el alcance de stories se incrementó significativamente.</div>
+    </div>
+    <div class="res-card reveal d3">
+      <div class="rnum" style="font-size:38px;padding-top:14px;">VIRAL</div>
+      <div class="rlabel"><strong>Contenido viralizado</strong>Campañas con alcance masivo orgánico en Instagram y TikTok.</div>
+    </div>
+  </div>
+</section>
+
+<!-- DIFERENCIAL -->
+<section class="diff-section">
+  <p class="sec-label reveal">Por qué elegir AKT Media</p>
+  <h2 class="sec-title reveal">Lo que nos hace <em>diferentes.</em></h2>
+  <div class="diff-grid">
+    <div class="diff-card reveal"><div class="dicon">👂</div><h3>Escucha activa primero</h3><p>Antes de producir una sola pieza, entendemos tu marca, tu cliente ideal y tus objetivos. Tu voz guía cada decisión.</p></div>
+    <div class="diff-card reveal d1"><div class="dicon">🔍</div><h3>Análisis del entorno</h3><p>Estudiamos tu competencia, las tendencias y el comportamiento digital de tu audiencia. Cada acción tiene dirección.</p></div>
+    <div class="diff-card reveal d2"><div class="dicon">🤝</div><h3>Cercanía genuina</h3><p>No eres un número en nuestra cartera. Comunicación directa, resultados transparentes y compromiso real con tu crecimiento.</p></div>
+    <div class="diff-card reveal d1"><div class="dicon">🌎</div><h3>Estándares internacionales</h3><p>Nuestra CEO trabajó con marcas en EE.UU. Ese nivel de exigencia y visión global está disponible para tu marca hoy.</p></div>
+    <div class="diff-card reveal d2"><div class="dicon">🎬</div><h3>Equipo multidisciplinario</h3><p>Creativos, estrategas, productores y analistas trabajando juntos. No un freelancer. Un equipo completo y especializado.</p></div>
+    <div class="diff-card reveal d3"><div class="dicon">📊</div><h3>Resultados medibles</h3><p>Cada campaña tiene métricas claras. Sabrás exactamente qué funcionó y cuánto creció tu marca.</p></div>
+  </div>
+</section>
+
+<!-- MANIFESTO -->
+<section class="mani-section">
+  <blockquote class="mani-q reveal">"No somos una agencia más.<br>Somos el equipo que tu marca<br><span class="hl">necesitaba desde el inicio."</span></blockquote>
+  <p class="mani-a reveal d1">— Katheryne Rondon · CEO &amp; Directora Creativa · AguaKathe Media</p>
+</section>
+
+<!-- CONTACTO -->
+<section class="contact-section" id="contacto">
+  <div class="reveal">
+    <p class="sec-label">¿Lista para escalar?</p>
+    <h2 class="ctitle">Hablemos<br><em>hoy.</em></h2>
+    <p class="cdesc">Si tu marca está lista para el siguiente nivel, nosotros tenemos el equipo, la estrategia y la energía para llevarte ahí. Sin vueltas. Sin excusas.</p>
+    <div class="citems">
+      <a href="mailto:hola@aguakathemedia.com" class="citem"><div class="cico">✉</div>hola@aguakathemedia.com</a>
+      <a href="#" class="citem"><div class="cico">📱</div>@aguakathemedia</a>
+      <a href="#" class="citem"><div class="cico">🌐</div>aguakathemedia.com</a>
+    </div>
+  </div>
+  <div class="cright reveal d1">
+    <h3>¿Qué puedes esperar?</h3>
+    <p>Un equipo que <strong>te escucha antes de hablar</strong>. Estrategia con base en el análisis de tu entorno real. Producción de alta calidad. Y cercanía genuina en cada paso.</p>
+    <p style="font-family:'Playfair Display',serif;font-style:italic;font-size:18px;color:rgba(255,255,255,0.78);line-height:1.6;">"Llevamos un año en el mercado y ya tenemos resultados que hablan por nosotros. Imagina lo que haremos por tu marca."</p>
+    <br>
+    <a href="mailto:hola@aguakathemedia.com" class="btn-main" style="display:inline-block;margin-top:8px;">Solicitar propuesta</a>
+  </div>
+</section>
+
+<footer>
+  <div class="flogo">AKT<span>Media</span></div>
+  <p class="fcopy">© 2025 AguaKathe Media · Agencia de Mercadeo · Todos los derechos reservados</p>
+  <div class="flinks"><a href="#">Instagram</a><a href="#">TikTok</a><a href="#">LinkedIn</a></div>
+</footer>
+
+<script>
+const cur = document.getElementById('C'), ring = document.getElementById('R');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cur.style.transform=`translate(${mx-5}px,${my-5}px)`;});
+(function animR(){rx+=(mx-rx-16)*0.1;ry+=(my-ry-16)*0.1;ring.style.transform=`translate(${rx}px,${ry}px)`;requestAnimationFrame(animR);})();
+document.querySelectorAll('a,button,.prob-card,.svc-row,.res-card,.diff-card,.pill').forEach(el=>{
+  el.addEventListener('mouseenter',()=>{cur.style.transform+=' scale(2.2)';cur.style.background='#C8CC1A';});
+  el.addEventListener('mouseleave',()=>{cur.style.background='#3A5218';});
+});
+
+const obs=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');}),{threshold:0.1});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+
+// counter
+function animCount(){
+  document.querySelectorAll('.rnum[data-target]').forEach(el=>{
+    const target=parseInt(el.dataset.target);
+    let n=0;const step=Math.ceil(target/55);
+    const t=setInterval(()=>{
+      n=Math.min(n+step,target);
+      el.innerHTML=n+'<sup>%</sup>';
+      if(n>=target)clearInterval(t);
+    },22);
+  });
+}
+const resObs=new IntersectionObserver(entries=>{if(entries[0].isIntersecting){animCount();resObs.disconnect();}},{threshold:0.3});
+const resEl=document.querySelector('.res-section');
+if(resEl)resObs.observe(resEl);
+</script>
+</body>
+</html>
