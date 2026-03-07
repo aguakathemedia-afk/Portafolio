@@ -258,7 +258,12 @@ footer{padding:36px 60px;background:var(--dark);display:flex;justify-content:spa
         <input class="popup-input" type="text" id="popName" placeholder="Tu nombre completo" />
         <input class="popup-input" type="email" id="popEmail" placeholder="Tu correo electrónico" />
         <input class="popup-input" type="tel" id="popPhone" placeholder="Tu número de teléfono / WhatsApp" />
-        <button class="popup-btn" onclick="submitPopup()">Quiero que me contacten →</button>
+        <div style="display:flex;gap:10px;margin-top:4px;">
+          <button class="popup-btn" onclick="submitPopup()" style="flex:1;margin-top:0;">Quiero que me contacten →</button>
+          <a href="https://wa.me/584227221714" target="_blank" title="¡Escríbenos ahora por WhatsApp!" style="display:flex;align-items:center;justify-content:center;width:50px;background:#25D366;color:white;font-size:22px;text-decoration:none;flex-shrink:0;transition:background 0.3s;">
+            <svg viewBox="0 0 24 24" fill="white" width="24" height="24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.124.555 4.118 1.528 5.845L0 24l6.335-1.508A11.945 11.945 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.885 0-3.651-.502-5.178-1.381l-.371-.22-3.763.896.952-3.671-.242-.378A9.955 9.955 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
+          </a>
+        </div>
       </div>
       <p class="popup-skip" onclick="closePopup()">Ahora no, seguir viendo el sitio</p>
     </div>
@@ -450,7 +455,7 @@ footer{padding:36px 60px;background:var(--dark);display:flex;justify-content:spa
     <h2 class="ctitle">Cotiza hoy.<br><em>Trabajemos</em><br>juntos.</h2>
     <p class="cdesc">Si tu marca está lista para el siguiente nivel, nosotros tenemos el equipo, la estrategia y la energía para llevarte ahí. Sin vueltas. Sin excusas.</p>
     <div class="citems">
-      <a href="#" onclick="openPopup();return false;" class="citem"><div class="cico">✉</div>aguakathemedia@gmail.com</a>
+      <a href="#" onclick="openPopup();return false;" class="citem"><div class="cico">✉</div><span class="__cf_email__" data-cfemail="d6b7b1a3b7bdb7a2beb3bbb3b2bfb796b1bbb7bfbaf8b5b9bb">[email&#160;protected]</span></a>
       <a href="https://wa.me/584227221714" target="_blank" target="_blank" class="citem"><div class="cico">📞</div>+58 422 722 1714</a>
       <a href="https://www.instagram.com/aguakathemedia" target="_blank" class="citem"><div class="cico">📸</div>@aguakathemedia</a>
     </div>
@@ -473,7 +478,7 @@ footer{padding:36px 60px;background:var(--dark);display:flex;justify-content:spa
   <div class="flinks"><a href="https://www.instagram.com/aguakathemedia" target="_blank">Instagram</a><a href="https://wa.me/584227221714" target="_blank" target="_blank">WhatsApp</a><a href="#" onclick="openPopup();return false;">Email</a></div>
 </footer>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 const cur = document.getElementById('C'), ring = document.getElementById('R');
 let mx=0,my=0,rx=0,ry=0;
 document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cur.style.transform=`translate(${mx-5}px,${my-5}px)`;});
@@ -538,15 +543,10 @@ async function submitPopup(){
   const name=document.getElementById('popName').value.trim();
   const email=document.getElementById('popEmail').value.trim();
   const phone=document.getElementById('popPhone').value.trim();
-  if(!name||!email||!phone){
-    alert('Por favor completa todos los campos.');
-    return;
-  }
+  if(!name||!email||!phone){alert('Por favor completa todos los campos.');return;}
   const btn=document.querySelector('.popup-btn');
   btn.textContent='Enviando...';
   btn.disabled=true;
-
-  // 1. Send to Formspree → arrives at aguakathemedia@gmail.com
   try {
     const fd=new FormData();
     fd.append('name',name);
@@ -554,27 +554,22 @@ async function submitPopup(){
     fd.append('phone',phone);
     fd.append('_replyto',email);
     fd.append('_subject','Nuevo lead desde AguaKathe Media');
-    await fetch('https://formspree.io/f/xvzwggyp',{
-      method:'POST',
-      headers:{'Accept':'application/json'},
-      body:fd
-    });
-  } catch(e){ console.log('Formspree:', e); }
-
-  // 2. ALWAYS open WhatsApp with the data
-  const msg=encodeURIComponent(
-    '\uD83E\uDD51 Hola AguaKathe Media! Me contacto desde su sitio web.' +
-    '\n\nNombre: '+name+
-    '\nCorreo: '+email+
-    '\nTel\u00e9fono: '+phone+
-    '\n\nQuiero saber m\u00e1s sobre sus servicios.'
-  );
-  window.open('https://wa.me/584227221714?text='+msg,'_blank');
-
-  // 3. Show success screen
-  document.getElementById('popupForm').style.display='none';
-  document.getElementById('popupSuccess').style.display='block';
-  setTimeout(closePopup,3500);
+    const res=await fetch('https://formspree.io/f/xvzwggyp',{method:'POST',headers:{'Accept':'application/json'},body:fd});
+    const data=await res.json();
+    if(res.ok && !(data.errors && data.errors.length)){
+      document.getElementById('popupForm').style.display='none';
+      document.getElementById('popupSuccess').style.display='block';
+      setTimeout(closePopup,3500);
+    } else {
+      btn.textContent='Quiero que me contacten →';
+      btn.disabled=false;
+      alert('No se pudo enviar. Intenta de nuevo.');
+    }
+  } catch(e){
+    btn.textContent='Quiero que me contacten →';
+    btn.disabled=false;
+    alert('Error de conexión. Intenta de nuevo.');
+  }
 }
 
 // Close popup when clicking outside the box
