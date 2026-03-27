@@ -548,15 +548,22 @@ async function submitPopup(){
   btn.textContent='Enviando...';
   btn.disabled=true;
   try {
-    const fd=new FormData();
-    fd.append('name',name);
-    fd.append('email',email);
-    fd.append('phone',phone);
-    fd.append('_replyto',email);
-    fd.append('_subject','Nuevo lead desde AguaKathe Media');
-    const res=await fetch('https://formspree.io/f/xvzwggyp',{method:'POST',headers:{'Accept':'application/json'},body:fd});
+    const res=await fetch('https://formspree.io/f/xvzwggyp',{
+      method:'POST',
+      headers:{
+        'Content-Type':'application/json',
+        'Accept':'application/json'
+      },
+      body:JSON.stringify({
+        name: name,
+        email: email,
+        phone: phone,
+        _replyto: email,
+        _subject: 'Nuevo lead desde AguaKathe Media'
+      })
+    });
     const data=await res.json();
-    if(res.ok && !(data.errors && data.errors.length)){
+    if(res.ok && !data.errors){
       document.getElementById('popupForm').style.display='none';
       document.getElementById('popupSuccess').style.display='block';
       setTimeout(closePopup,3500);
